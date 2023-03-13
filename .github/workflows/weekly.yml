@@ -23,10 +23,10 @@ on:
   workflow_dispatch:
 jobs:
   compile_and_test:
-    if: github.repository_owner == 'apache'
     strategy:
       matrix:
         flink: [1.16-SNAPSHOT, 1.17-SNAPSHOT]
-    uses: apache/flink-connector-shared-utils/.github/workflows/ci.yml@ci_utils
+    uses: MartijnVisser/flink-connector-shared-utils/.github/workflows/ci.yml@flink-31416-recognize-testtype
     with:
       flink_version: ${{ matrix.flink }}
+      run_dependency_convergence: false
