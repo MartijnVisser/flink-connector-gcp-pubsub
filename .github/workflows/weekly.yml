@@ -23,11 +23,20 @@ on:
   workflow_dispatch:
 jobs:
   compile_and_test:
+    runs-on: ubuntu-latest
     if: github.repository_owner == 'apache'
     strategy:
       matrix:
         flink: [1.16-SNAPSHOT, 1.17-SNAPSHOT, 1.18-SNAPSHOT]
-    uses: apache/flink-connector-shared-utils/.github/workflows/ci.yml@ci_utils
-    with:
-      flink_version: ${{ matrix.flink }}
-      run_dependency_convergence: false
+        branches: [main, v3.0]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ matrix.branches }}
+
+      - name: Run workflow
+        uses: apache/flink-connector-shared-utils/.github/workflows/ci.yml@ci_utils
+        with:
+          flink_version: ${{ matrix.flink }}
+          run_dependency_convergence: false
