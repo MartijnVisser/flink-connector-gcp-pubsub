@@ -24,7 +24,7 @@ on:
 jobs:
   compile_and_test:
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'apache'
+    if: github.repository_owner == 'martijnvisser'
     strategy:
       matrix:
         flink: [1.16-SNAPSHOT, 1.17-SNAPSHOT, 1.18-SNAPSHOT]
